@@ -5,7 +5,7 @@ const Mailgen = require('mailgen');
 const {EMAIL, PASSWORD} = require('../env.js');
 /*send mail from testing account*/
 const signup = async (req, res) => {
-    const { name, email, subject } = req.body;
+    const { name, email, subject, message } = req.body;
 
     // Crear un objeto Mailgen
     const mailGenerator = new Mailgen({
@@ -24,9 +24,10 @@ const signup = async (req, res) => {
             table: {
                 data: [
                     {
-                        descripción: `<strong>Nombre:</strong> ${name}<br>
-                                      <strong>Correo electrónico:</strong> ${email}<br>
-                                      <strong>Teléfono:</strong> ${subject}`,
+                        descripción: `<strong>Name:</strong> ${name}<br>
+                                      <strong>Email:</strong> ${email}<br>
+                                      <strong>Subject</strong> ${subject}<br>
+                                      <strong>message:</strong> ${message}`,
                     }
                 ]
             },
