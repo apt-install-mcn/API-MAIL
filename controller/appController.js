@@ -20,7 +20,7 @@ const signup = async (req, res) => {
     const emailContent = {
         body: {
             name: name,
-            intro: 'Tu información ha sido recibida con éxito',
+            intro: 'Your Information have been delivered',
             table: {
                 data: [
                     {
@@ -31,7 +31,7 @@ const signup = async (req, res) => {
                     }
                 ]
             },
-            outro: 'Nos comunicaremos pronto'
+            outro: 'We will get in touch soon'
         }
     };
 
@@ -49,18 +49,22 @@ const signup = async (req, res) => {
 
     // Configurar las opciones del correo
     const mailOptions = {
-        from: 'moosescn20@gmail.com',
+        from: {
+            address: 'moosescn20@gmail.com',// Dirección de correo electrónico del remitente
+            name: 'Moises Carrillo' // Nombre del remitente
+        },
         to: `${email}`,
-        cc: 'moosescn20@gmail.com',
-        subject: 'Nuevo mensaje de Moises Carrillo',
+        bcc: 'moosescn20@gmail.com',
+        subject: 'New message from Moises Carrillo',
         html: emailBody
     };
+    
 
     // Enviar el correo electrónico
     transporter.sendMail(mailOptions)
         .then((info) => {
             return res.status(201).json({
-                msg: '¡Mensaje enviado con éxito!',
+                msg: '¡Message sent successfully!',
                 info: info.messageId,
                 preview: nodemailer.getTestMessageUrl(info)
             });
